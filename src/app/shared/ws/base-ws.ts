@@ -11,7 +11,7 @@ export class BaseWS<T> {
     this._url = `https://gateway.marvel.com:443/v1/public/${url}`;
   }
 
-  public getTest(): Observable<T> {
+  public getList(): Observable<T> {
     return this._httpClient.get<T>(this._url + this.getAuthParams());
   }
 
@@ -25,10 +25,6 @@ export class BaseWS<T> {
 
   getTimestamp () {
     return this.timestamp.getTime().toString();
-  }
-
-  errorHandle(error: any) {
-    console.log(error);
   }
 
 }

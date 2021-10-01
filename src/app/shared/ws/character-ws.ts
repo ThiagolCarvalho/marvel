@@ -9,8 +9,4 @@ export class CharacterWS extends BaseWS<IHero> {
   constructor(private httpClient: HttpClient) {
     super(httpClient, 'characters');
   }
-
-  getByFilter() {
-    // TODO
-  }
 }
