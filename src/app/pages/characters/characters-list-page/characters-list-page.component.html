@@ -2,7 +2,7 @@
   <div *ngFor="let character of characters" class="col-xl-2 col-lg-5-elements col-3 col-sm-4">
     <div class="card card-mouse-over">
       <img class="center" [src]="character.thumbnail.path + '.' + character.thumbnail.extension">
-      <div class="text-center" style="">
+      <div class="text-center card-text-border-top">
         <p>{{character.name}}</p>
       </div>
     </div>
