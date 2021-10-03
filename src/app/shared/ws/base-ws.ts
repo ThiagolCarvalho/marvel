@@ -15,15 +15,15 @@ export class BaseWS<T> {
     return this._httpClient.get<T>(this._url + this.getAuthParams());
   }
 
-  getAuthParams() {
+  public getAuthParams() {
     return `?ts=${this.getTimestamp()}&apikey=${secret.publicKey}&hash=${this.getHash()}`;
   }
 
-  getHash() {
+  private getHash() {
     return Md5.hashStr(this.getTimestamp() + secret.privateKey + secret.publicKey);
   }
 
-  getTimestamp () {
+  private getTimestamp () {
     return this.timestamp.getTime().toString();
   }
 
