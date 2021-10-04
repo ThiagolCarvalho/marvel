@@ -356,3 +356,8 @@ img.center {
 .round {
   border-radius: 0.5rem;
 }
+
+.filter-margin {
+  margin-left: 10px;
+  margin-top: 10px;
+}

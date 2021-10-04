@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ComicsWS} from "../../../shared/ws/comics-ws";
 import {IComic} from "../../../shared/models/IComic";
+import {IComicFilters} from "../../../shared/models/IComicFilters";
 
 @Component({
   selector: 'app-comics',
@@ -21,6 +22,16 @@ export class ComicsListPageComponent implements OnInit {
     this.comicsWS.getList().subscribe(value => {
       this.comics = value;
     });
+  }
+
+  emitFilters(event: Partial<IComicFilters>) {
+    if (event && event.title != null && event.title != "") {
+      this.comicsWS.getListByFilters(event.title).subscribe(value => {
+        this.comics = value;
+      });
+    } else {
+      this.getSeriesList();
+    }
   }
 
 }
