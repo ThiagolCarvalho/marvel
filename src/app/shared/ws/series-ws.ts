@@ -12,6 +12,6 @@ export class SeriesWS extends BaseWS<ISerie> {
   }
 
   public getListByFilters(title?: string): Observable<ISerie> {
-    return this.httpClient.get<ISerie>(`${this._url}?titleStartsWith=${title}&limit=60&${this.getAuthParams()}`);
+    return this.httpClient.get<ISerie>(`${this._url}?titleStartsWith=${title}&limit=24&${this.getAuthParams()}`);
   }
 }

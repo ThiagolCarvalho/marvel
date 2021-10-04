@@ -12,7 +12,7 @@ export class BaseWS<T> {
   }
 
   public getList(): Observable<T> {
-    return this._httpClient.get<T>(`${this._url}?limit=60&${this.getAuthParams()}`);
+    return this._httpClient.get<T>(`${this._url}?limit=24&${this.getAuthParams()}`);
   }
 
   public getAuthParams() {

@@ -12,6 +12,6 @@ export class CharacterWS extends BaseWS<ICharacter> {
   }
 
   public getListByFilters(name?: string): Observable<ICharacter> {
-    return this.httpClient.get<ICharacter>(`${this._url}?nameStartsWith=${name}&limit=60&${this.getAuthParams()}`);
+    return this.httpClient.get<ICharacter>(`${this._url}?nameStartsWith=${name}&limit=24&${this.getAuthParams()}`);
   }
 }
