@@ -1,0 +1,16 @@
+<div class="d-flex flex-end space-between">
+<app-series-filters (changeFilters)="emitFilters($event)"></app-series-filters>
+  <app-paginator (changePage)="changePage($event)" [totalElements]="series?.data?.total"
+                 [currentPage]="currentPage" style="margin-right: 10px"></app-paginator>
+</div>
+<div class="d-flex row">
+  <div *ngFor="let serie of series?.data?.results" class="col-xl-2 col-lg-5-elements col-3 col-sm-4">
+    <div class="card card-mouse-over">
+      <img class="center" [src]="serie.thumbnail.path + '.' + serie.thumbnail.extension">
+      <div class="text-center card-text-border-top">
+        <p>{{serie.title}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+

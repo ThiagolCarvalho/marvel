@@ -1,0 +1,5 @@
+<div class="d-flex row">
+  <button (click)="backPage()" [disabled]="currentPage === 1"><-</button>
+  <span class="mx-10">{{currentPage}}</span>
+  <button (click)="forwardPage()" [disabled]="currentPage >= maxPage()">-></button>
+</div>
