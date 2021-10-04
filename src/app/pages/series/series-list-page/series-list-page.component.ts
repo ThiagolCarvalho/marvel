@@ -11,6 +11,9 @@ import {ISerieFilters} from "../../../shared/models/ISerieFilters";
 export class SeriesListPageComponent implements OnInit {
 
   series = {} as ISerie;
+  title: string = '';
+  currentPage: number = 1;
+  limit: number = 24;
 
   constructor(private seriesWS: SeriesWS) { }
 
@@ -19,18 +22,37 @@ export class SeriesListPageComponent implements OnInit {
   }
 
   private getSeriesList() {
-    this.seriesWS.getList(0).subscribe(value => {
+    this.seriesWS.getList((this.currentPage - 1) * this.limit).subscribe(value => {
       this.series = value;
     });
   }
 
   emitFilters(event: Partial<ISerieFilters>) {
     if (event && event.title != null && event.title != "") {
-      this.seriesWS.getListByFilters(event.title).subscribe(value => {
+      this.title = event.title;
+      this.seriesWS.getListByFilters((this.currentPage - 1) * this.limit, this.title).subscribe(value => {
         this.series = value;
+        this.currentPage = 1
       });
     } else {
+      this.title = '';
+      this.currentPage = 1;
       this.getSeriesList();
+    }
+  }
+
+  changePage(event: Partial<number>) {
+    if (event != null) {
+      this.currentPage = event;
+      if (this.title != '') {
+        this.seriesWS.getListByFilters((event - 1) * this.limit, this.title).subscribe(value => {
+          this.series = value;
+        });
+      } else {
+        this.seriesWS.getList((event - 1) * this.limit).subscribe(value => {
+          this.series = value;
+        });
+      }
     }
   }
 }
