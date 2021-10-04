@@ -11,8 +11,8 @@ export class BaseWS<T> {
     this._url = `https://gateway.marvel.com:443/v1/public/${url}`;
   }
 
-  public getList(): Observable<T> {
-    return this._httpClient.get<T>(`${this._url}?limit=24&${this.getAuthParams()}`);
+  public getList(offset: number): Observable<T> {
+    return this._httpClient.get<T>(`${this._url}?limit=24&offset=${offset}&${this.getAuthParams()}`);
   }
 
   public getAuthParams() {

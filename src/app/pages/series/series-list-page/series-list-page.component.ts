@@ -19,7 +19,7 @@ export class SeriesListPageComponent implements OnInit {
   }
 
   private getSeriesList() {
-    this.seriesWS.getList().subscribe(value => {
+    this.seriesWS.getList(0).subscribe(value => {
       this.series = value;
     });
   }

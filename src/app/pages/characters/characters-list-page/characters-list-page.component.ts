@@ -11,6 +11,9 @@ import {ICharacter} from "../../../shared/models/ICharacter";
 export class CharactersListPageComponent implements OnInit {
 
   characters = {} as ICharacter;
+  name: string = '';
+  currentPage: number = 1;
+  limit: number = 24;
 
   constructor(private characterWS: CharacterWS) { }
 
@@ -19,20 +22,38 @@ export class CharactersListPageComponent implements OnInit {
   }
 
   private getCharactersList() {
-    this.characterWS.getList().subscribe(value => {
+    this.characterWS.getList((this.currentPage - 1) * this.limit).subscribe(value => {
       this.characters = value;
     });
   }
 
   emitFilters(event: Partial<ICharacterFilters>) {
     if (event && event.name != null && event.name != "") {
-      this.characterWS.getListByFilters(event.name).subscribe(value => {
+      this.name = event.name;
+      this.characterWS.getListByFilters((this.currentPage - 1) * this.limit, this.name).subscribe(value => {
         this.characters = value;
+        this.currentPage = 1;
       });
     } else {
+      this.name = '';
+      this.currentPage = 1;
       this.getCharactersList();
     }
+  }
 
+  changePage(event: Partial<number>) {
+    if (event != null) {
+      this.currentPage = event;
+      if (this.name != '') {
+        this.characterWS.getListByFilters((event - 1) * this.limit, this.name).subscribe(value => {
+          this.characters = value;
+        });
+      } else {
+        this.characterWS.getList((event - 1) * this.limit).subscribe(value => {
+          this.characters = value;
+        });
+      }
+    }
   }
 
 }

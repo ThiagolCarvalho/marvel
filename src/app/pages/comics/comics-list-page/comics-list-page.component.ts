@@ -19,7 +19,7 @@ export class ComicsListPageComponent implements OnInit {
   }
 
   private getSeriesList() {
-    this.comicsWS.getList().subscribe(value => {
+    this.comicsWS.getList(0).subscribe(value => {
       this.comics = value;
     });
   }

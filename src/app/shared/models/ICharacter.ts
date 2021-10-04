@@ -7,7 +7,7 @@ export interface ICharacter {
   "data": {
     "offset": "int",
     "limit": "int",
-    "total": "int",
+    "total": number,
     "count": "int",
     "results": [
       {

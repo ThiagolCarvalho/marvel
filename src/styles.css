@@ -361,3 +361,16 @@ img.center {
   margin-left: 10px;
   margin-top: 10px;
 }
+
+.flex-end {
+  align-items: flex-end;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.mx-10 {
+  margin-right: 10px;
+  margin-left: 10px;
+}
