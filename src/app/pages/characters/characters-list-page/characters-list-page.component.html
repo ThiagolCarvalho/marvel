@@ -1,5 +1,6 @@
+<app-character-filters (changeFilters)="emitFilters($event)"></app-character-filters>
 <div class="d-flex row">
-  <div *ngFor="let character of characters" class="col-xl-2 col-lg-5-elements col-3 col-sm-4">
+  <div *ngFor="let character of characters?.data?.results" class="col-xl-2 col-lg-5-elements col-3 col-sm-4">
     <div class="card card-mouse-over">
       <img class="center" [src]="character.thumbnail.path + '.' + character.thumbnail.extension">
       <div class="text-center card-text-border-top">

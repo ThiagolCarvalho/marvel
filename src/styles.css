@@ -352,3 +352,7 @@ img.center {
   opacity: 0.7;
   cursor: pointer;
 }
+
+.round {
+  border-radius: 0.5rem;
+}

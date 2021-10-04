@@ -4,7 +4,7 @@ import {Md5} from 'ts-md5/dist/md5';
 import {secret} from '../../../../secret';
 
 export class BaseWS<T> {
-  private _url: string;
+  protected _url: string;
   private timestamp = new Date();
 
   constructor(private _httpClient: HttpClient, private url: string) {
@@ -12,11 +12,11 @@ export class BaseWS<T> {
   }
 
   public getList(): Observable<T> {
-    return this._httpClient.get<T>(this._url + this.getAuthParams());
+    return this._httpClient.get<T>(`${this._url}?limit=60&${this.getAuthParams()}`);
   }
 
   public getAuthParams() {
-    return `?ts=${this.getTimestamp()}&apikey=${secret.publicKey}&hash=${this.getHash()}`;
+    return `ts=${this.getTimestamp()}&apikey=${secret.publicKey}&hash=${this.getHash()}`;
   }
 
   private getHash() {

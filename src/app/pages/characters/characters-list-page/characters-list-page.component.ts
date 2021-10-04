@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CharacterWS} from "../../../shared/ws/character-ws";
+import {ICharacterFilters} from "../../../shared/models/ICharacterFilters";
+import {ICharacter} from "../../../shared/models/ICharacter";
 
 @Component({
   selector: 'app-characters',
@@ -8,7 +10,7 @@ import {CharacterWS} from "../../../shared/ws/character-ws";
 })
 export class CharactersListPageComponent implements OnInit {
 
-  characters: any;
+  characters = {} as ICharacter;
 
   constructor(private characterWS: CharacterWS) { }
 
@@ -17,9 +19,20 @@ export class CharactersListPageComponent implements OnInit {
   }
 
   private getCharactersList() {
-    this.characterWS.getList().subscribe((value: any) => {
-      this.characters = value.data.results;
+    this.characterWS.getList().subscribe(value => {
+      this.characters = value;
     });
+  }
+
+  emitFilters(event: Partial<ICharacterFilters>) {
+    if (event && event.name != null && event.name != "") {
+      this.characterWS.getListByFilters(event.name).subscribe(value => {
+        this.characters = value;
+      });
+    } else {
+      this.getCharactersList();
+    }
+
   }
 
 }
