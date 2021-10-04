@@ -1,5 +1,6 @@
+<app-series-filters (changeFilters)="emitFilters($event)"></app-series-filters>
 <div class="d-flex row">
-  <div *ngFor="let serie of series" class="col-xl-2 col-lg-5-elements col-3 col-sm-4">
+  <div *ngFor="let serie of series?.data?.results" class="col-xl-2 col-lg-5-elements col-3 col-sm-4">
     <div class="card card-mouse-over">
       <img class="center" [src]="serie.thumbnail.path + '.' + serie.thumbnail.extension">
       <div class="text-center card-text-border-top">

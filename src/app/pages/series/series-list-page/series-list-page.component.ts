@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SeriesWS} from "../../../shared/ws/series-ws";
+import {ISerie} from "../../../shared/models/ISerie";
+import {ISerieFilters} from "../../../shared/models/ISerieFilters";
 
 @Component({
   selector: 'app-series',
@@ -8,7 +10,7 @@ import {SeriesWS} from "../../../shared/ws/series-ws";
 })
 export class SeriesListPageComponent implements OnInit {
 
-  series: any;
+  series = {} as ISerie;
 
   constructor(private seriesWS: SeriesWS) { }
 
@@ -18,8 +20,17 @@ export class SeriesListPageComponent implements OnInit {
 
   private getSeriesList() {
     this.seriesWS.getList().subscribe(value => {
-      this.series = value.data.results;
+      this.series = value;
     });
   }
 
+  emitFilters(event: Partial<ISerieFilters>) {
+    if (event && event.title != null && event.title != "") {
+      this.seriesWS.getListByFilters(event.title).subscribe(value => {
+        this.series = value;
+      });
+    } else {
+      this.getSeriesList();
+    }
+  }
 }
