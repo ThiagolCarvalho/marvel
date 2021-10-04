@@ -4,6 +4,7 @@ import {ComicsListPageComponent} from "./comics-list-page/comics-list-page.compo
 import {ComicsListRoutingModule} from "./comics-list-routing.module";
 import {ComicsWS} from "../../shared/ws/comics-ws";
 import {ComicsListFiltersComponent} from "./comics-list-filters/comics-list-filters.component";
+import {PaginatorModule} from "../../shared/components/paginator/paginator.module";
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import {ComicsListFiltersComponent} from "./comics-list-filters/comics-list-filt
   ],
   imports: [
     CommonModule,
-    ComicsListRoutingModule
+    ComicsListRoutingModule,
+    PaginatorModule
   ],
   providers: [ComicsWS]
 })

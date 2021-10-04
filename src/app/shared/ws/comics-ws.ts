@@ -11,7 +11,7 @@ export class ComicsWS extends BaseWS<IComic> {
     super(httpClient, 'comics');
   }
 
-  public getListByFilters(title?: string): Observable<IComic> {
-    return this.httpClient.get<IComic>(`${this._url}?titleStartsWith=${title}&limit=24&${this.getAuthParams()}`);
+  public getListByFilters(offset: number, title?: string): Observable<IComic> {
+    return this.httpClient.get<IComic>(`${this._url}?titleStartsWith=${title}&limit=24&offset=${offset}&${this.getAuthParams()}`);
   }
 }

@@ -4,17 +4,17 @@ import {CharactersListPageComponent} from "./characters-list-page/characters-lis
 import {CharacterWS} from "../../shared/ws/character-ws";
 import {CharactersListRoutingModule} from "./characters-list-routing.module";
 import {CharactersListFiltersComponent} from "./characters-list-filters/characters-list-filters.component";
-import {PaginatorComponent} from "../../shared/components/paginator/paginator.component";
+import {PaginatorModule} from "../../shared/components/paginator/paginator.module";
 
 @NgModule({
   declarations: [
     CharactersListPageComponent,
-    CharactersListFiltersComponent,
-    PaginatorComponent
+    CharactersListFiltersComponent
   ],
   imports: [
     CommonModule,
-    CharactersListRoutingModule
+    CharactersListRoutingModule,
+    PaginatorModule
   ],
   providers: [CharacterWS]
 })

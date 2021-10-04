@@ -1,4 +1,8 @@
-<app-comics-filters (changeFilters)="emitFilters($event)"></app-comics-filters>
+<div class="d-flex flex-end space-between">
+  <app-comics-filters (changeFilters)="emitFilters($event)"></app-comics-filters>
+  <app-paginator (changePage)="changePage($event)" [totalElements]="comics?.data?.total"
+                 [currentPage]="currentPage" style="margin-right: 10px"></app-paginator>
+</div>
 <div class="d-flex row">
   <div *ngFor="let comic of comics?.data?.results" class="col-xl-2 col-lg-5-elements col-3 col-sm-4">
     <div class="card card-mouse-over">

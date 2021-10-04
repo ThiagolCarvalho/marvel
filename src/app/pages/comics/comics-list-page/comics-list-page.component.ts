@@ -11,6 +11,9 @@ import {IComicFilters} from "../../../shared/models/IComicFilters";
 export class ComicsListPageComponent implements OnInit {
 
   comics = {} as IComic;
+  title: string = '';
+  currentPage: number = 1;
+  limit: number = 24;
 
   constructor(private comicsWS: ComicsWS) { }
 
@@ -19,18 +22,37 @@ export class ComicsListPageComponent implements OnInit {
   }
 
   private getSeriesList() {
-    this.comicsWS.getList(0).subscribe(value => {
+    this.comicsWS.getList((this.currentPage - 1) * this.limit).subscribe(value => {
       this.comics = value;
     });
   }
 
   emitFilters(event: Partial<IComicFilters>) {
     if (event && event.title != null && event.title != "") {
-      this.comicsWS.getListByFilters(event.title).subscribe(value => {
+      this.title = event.title;
+      this.comicsWS.getListByFilters((this.currentPage - 1) * this.limit, this.title).subscribe(value => {
         this.comics = value;
+        this.currentPage = 1
       });
     } else {
+      this.title = '';
+      this.currentPage = 1;
       this.getSeriesList();
+    }
+  }
+
+  changePage(event: Partial<number>) {
+    if (event != null) {
+      this.currentPage = event;
+      if (this.title != '') {
+        this.comicsWS.getListByFilters((event - 1) * this.limit, this.title).subscribe(value => {
+          this.comics = value;
+        });
+      } else {
+        this.comicsWS.getList((event - 1) * this.limit).subscribe(value => {
+          this.comics = value;
+        });
+      }
     }
   }
 
